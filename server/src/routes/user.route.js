@@ -10,14 +10,14 @@ const router = express.Router();
 
 router.post(
   "/signup",
-  body("username")
+  body("email")
     .exists()
-    .withMessage("username is required")
-    .isLength({ min: 8 })
-    .withMessage("username minimum 8 characters")
+    .withMessage("email is required")
+    .isLength({ min: 3 })
+    .withMessage("email minimum 3 characters")
     .custom(async (value) => {
-      const user = await userModel.findOne({ username: value });
-      if (user) return Promise.reject("username already used");
+      const user = await userModel.findOne({ email: value });
+      if (user) return Promise.reject("email already used");
     }),
   body("password")
     .exists()
@@ -45,11 +45,11 @@ router.post(
 
 router.post(
   "/signin",
-  body("username")
+  body("email")
     .exists()
-    .withMessage("username is required")
+    .withMessage("email is required")
     .isLength({ min: 8 })
-    .withMessage("username minimum 8 characters"),
+    .withMessage("email minimum 8 characters"),
   body("password")
     .exists()
     .withMessage("password is required")

@@ -4,17 +4,17 @@ import responseHandler from "../handlers/response.handler.js";
 
 const signup = async (req, res) => {
   try {
-    const { username, password, displayName } = req.body;
+    const { email, password, displayName } = req.body;
 
-    const checkUser = await userModel.findOne({ username });
+    const checkUser = await userModel.findOne({ email });
 
     if (checkUser)
-      return responseHandler.badrequest(res, "username already used");
+      return responseHandler.badrequest(res, "email already used");
 
     const user = new userModel();
 
     user.displayName = displayName;
-    user.username = username;
+    user.email = email;
     user.setPassword(password);
 
     await user.save();
@@ -37,11 +37,11 @@ const signup = async (req, res) => {
 
 const signin = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
     const user = await userModel
-      .findOne({ username })
-      .select("username password salt id displayName");
+      .findOne({ email })
+      .select("email password salt id displayName");
 
     if (!user) return responseHandler.badrequest(res, "User not exist");
 

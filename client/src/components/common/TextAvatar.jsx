@@ -1,6 +1,7 @@
 import { Avatar } from "@mui/material";
 
 const TextAvatar = ({ text }) => {
+  
   const stringToColor = (str) => {
     let hash = 0;
     let i;

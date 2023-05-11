@@ -20,7 +20,7 @@ const themeConfig = {
               contrastText: "#ffffff",
             },
             background: {
-              default: "#000000",
+              default: "#001219",
               paper: "#131313",
             },
           }
@@ -34,7 +34,8 @@ const themeConfig = {
               contrastText: "#ffffff",
             },
             background: {
-              default: colors.grey["100"],
+              // default: colors.grey["100"],
+              default: "#eaf4f4",
             },
           };
 

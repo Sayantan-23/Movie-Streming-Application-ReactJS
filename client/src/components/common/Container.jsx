@@ -29,7 +29,11 @@ const Container = ({ header, children }) => {
               },
             }}
           >
-            <Typography variant="h5" fontWeight="700">
+            <Typography
+              variant="h5"
+              fontWeight="700"
+              sx={{ textTransform: "capitalize" }}
+            >
               {header}
             </Typography>
           </Box>
