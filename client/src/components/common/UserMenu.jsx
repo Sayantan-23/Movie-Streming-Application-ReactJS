@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import menuConfigs from "../../configs/menu.configs";
 import { setUser } from "../../redux/features/userSlice";
+import TextAvatar from "./TextAvatar";
 
 const UserMenu = () => {
   const { user } = useSelector((state) => state.user);
@@ -25,13 +26,14 @@ const UserMenu = () => {
     <>
       {user && (
         <>
-          <Typography
+          {/* <Typography
             variant="h6"
             sx={{ cursor: "pointer", userSelect: "none" }}
             onClick={toggleMenu}
           >
             {user.displayName}
-          </Typography>
+          </Typography> */}
+          <TextAvatar onClick={toggleMenu} text={user.displayName} />
           <Menu
             open={Boolean(anchorEl)}
             anchorEl={anchorEl}
