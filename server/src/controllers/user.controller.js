@@ -110,9 +110,7 @@ const verifyEmail = async (req, res) => {
     
     const emailVerificationToken = await emailVerificationTokenModel.findOne({ verificationToken })
     
-    if (!emailVerificationToken) {
-      
-    }
+    if (!emailVerificationToken) return responseHandler.badrequest("Your verification token is either wrong or expired")
 
   } catch {
     responseHandler.error(res);
