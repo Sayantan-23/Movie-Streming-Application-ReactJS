@@ -23,12 +23,6 @@ const userSchema = new mongoose.Schema(
       required: true,
       select: false,
     },
-    //**  testing
-    verified: {
-      type: Boolean,
-      default: false,
-    },
-    // ***
   },
   modelOptions
 );

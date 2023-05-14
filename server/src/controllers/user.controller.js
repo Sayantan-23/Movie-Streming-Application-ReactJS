@@ -1,6 +1,4 @@
 import userModel from "../models/user.model.js";
-import emailVerificationTokenModel from "../models/emailVerificationToken.model.js";
-import { sendEmailVerificationToken } from "../utils/email.js";
 import jsonwebtoken from "jsonwebtoken";
 import responseHandler from "../handlers/response.handler.js";
 
@@ -72,52 +70,6 @@ const signin = async (req, res) => {
   }
 };
 
-//****** test */
-const requestEmailVerification = async (req, res) => {
-  try {
-    const user = await userModel.findById(req.user.id).select("email verified");
-
-    if (!user) return responseHandler.unauthorize(res);
-
-    const checkVerified = await userModel.findOne({ verified });
-
-    if (checkVerified)
-      return responseHandler.badrequest(
-        res,
-        "Your account is already verified"
-      );
-
-    const verificationCode = crypto.randomInt(100000, 999999).toString();
-
-    const emailVerificationToken = new emailVerificationTokenModel();
-
-    emailVerificationToken.user = user;
-    emailVerificationToken.verificationToken = verificationCode;
-
-    await emailVerificationToken.save();
-
-    await sendEmailVerificationToken(user.email, verificationCode);
-
-    responseHandler.ok(res);
-  } catch {
-    responseHandler.error(res);
-  }
-};
-
-const verifyEmail = async (req, res) => {
-  try {
-    const { verificationToken } = req.body
-    
-    const emailVerificationToken = await emailVerificationTokenModel.findOne({ verificationToken })
-    
-    if (!emailVerificationToken) return responseHandler.badrequest("Your verification token is either wrong or expired")
-
-  } catch {
-    responseHandler.error(res);
-  }
-}
-//****** test */
-
 const updatePassword = async (req, res) => {
   try {
     const { password, newPassword } = req.body;
@@ -158,5 +110,4 @@ export default {
   signin,
   getInfo,
   updatePassword,
-  requestEmailVerification,
 };

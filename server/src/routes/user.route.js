@@ -59,6 +59,19 @@ router.post(
   userController.signin
 );
 
+// router.post(
+//   "/request-email",
+//   requestHandler.validate,
+//   userController.requestEmailVerification
+// );
+
+// router.put(
+//   "/verify-email",
+//   body("verificationToken").exists(),
+//   requestHandler.validate,
+//   userController.verifyEmail
+// );
+
 router.put(
   "/update-password",
   tokenMiddleware.auth,
