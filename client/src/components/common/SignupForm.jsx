@@ -18,14 +18,14 @@ const SignupForm = ({ switchAuthState }) => {
   const signinForm = useFormik({
     initialValues: {
       password: "",
-      email: "",
+      username: "",
       displayName: "",
-      confirmPassword: "",
+      confirmPassword: ""
     },
     validationSchema: Yup.object({
-      email: Yup.string()
-        .min(3, "email minimum 3 characters")
-        .required("email is required"),
+      username: Yup.string()
+        .min(8, "username minimum 8 characters")
+        .required("username is required"),
       password: Yup.string()
         .min(8, "password minimum 8 characters")
         .required("password is required"),
@@ -35,11 +35,12 @@ const SignupForm = ({ switchAuthState }) => {
       confirmPassword: Yup.string()
         .oneOf([Yup.ref("password")], "confirmPassword not match")
         .min(8, "confirmPassword minimum 8 characters")
-        .required("confirmPassword is required"),
+        .required("confirmPassword is required")
     }),
-    onSubmit: async (values) => {
+    onSubmit: async values => {
       setErrorMessage(undefined);
       setIsLoginRequest(true);
+      console.log("asdasdasdasd");
       const { response, err } = await userApi.signup(values);
       setIsLoginRequest(false);
 
@@ -51,7 +52,7 @@ const SignupForm = ({ switchAuthState }) => {
       }
 
       if (err) setErrorMessage(err.message);
-    },
+    }
   });
 
   return (
@@ -59,17 +60,14 @@ const SignupForm = ({ switchAuthState }) => {
       <Stack spacing={3}>
         <TextField
           type="text"
-          placeholder="email"
-          name="email"
+          placeholder="username"
+          name="username"
           fullWidth
-          value={signinForm.values.email}
+          value={signinForm.values.username}
           onChange={signinForm.handleChange}
           color="success"
-          error={
-            signinForm.touched.email &&
-            signinForm.errors.email !== undefined
-          }
-          helperText={signinForm.touched.email && signinForm.errors.email}
+          error={signinForm.touched.username && signinForm.errors.username !== undefined}
+          helperText={signinForm.touched.username && signinForm.errors.username}
         />
         <TextField
           type="text"
@@ -79,13 +77,8 @@ const SignupForm = ({ switchAuthState }) => {
           value={signinForm.values.displayName}
           onChange={signinForm.handleChange}
           color="success"
-          error={
-            signinForm.touched.displayName &&
-            signinForm.errors.displayName !== undefined
-          }
-          helperText={
-            signinForm.touched.displayName && signinForm.errors.displayName
-          }
+          error={signinForm.touched.displayName && signinForm.errors.displayName !== undefined}
+          helperText={signinForm.touched.displayName && signinForm.errors.displayName}
         />
         <TextField
           type="password"
@@ -95,10 +88,7 @@ const SignupForm = ({ switchAuthState }) => {
           value={signinForm.values.password}
           onChange={signinForm.handleChange}
           color="success"
-          error={
-            signinForm.touched.password &&
-            signinForm.errors.password !== undefined
-          }
+          error={signinForm.touched.password && signinForm.errors.password !== undefined}
           helperText={signinForm.touched.password && signinForm.errors.password}
         />
         <TextField
@@ -109,14 +99,8 @@ const SignupForm = ({ switchAuthState }) => {
           value={signinForm.values.confirmPassword}
           onChange={signinForm.handleChange}
           color="success"
-          error={
-            signinForm.touched.confirmPassword &&
-            signinForm.errors.confirmPassword !== undefined
-          }
-          helperText={
-            signinForm.touched.confirmPassword &&
-            signinForm.errors.confirmPassword
-          }
+          error={signinForm.touched.confirmPassword && signinForm.errors.confirmPassword !== undefined}
+          helperText={signinForm.touched.confirmPassword && signinForm.errors.confirmPassword}
         />
       </Stack>
 
@@ -131,15 +115,17 @@ const SignupForm = ({ switchAuthState }) => {
         sign up
       </LoadingButton>
 
-      <Button fullWidth sx={{ marginTop: 1 }} onClick={() => switchAuthState()}>
+      <Button
+        fullWidth
+        sx={{ marginTop: 1 }}
+        onClick={() => switchAuthState()}
+      >
         sign in
       </Button>
 
       {errorMessage && (
         <Box sx={{ marginTop: 2 }}>
-          <Alert severity="error" variant="outlined">
-            {errorMessage}
-          </Alert>
+          <Alert severity="error" variant="outlined" >{errorMessage}</Alert>
         </Box>
       )}
     </Box>

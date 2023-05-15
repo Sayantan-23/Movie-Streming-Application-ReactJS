@@ -17,23 +17,26 @@ const MediaSearch = () => {
   const [medias, setMedias] = useState([]);
   const [page, setPage] = useState(1);
 
-  const search = useCallback(async () => {
-    setOnSearch(true);
+  const search = useCallback(
+    async () => {
+      setOnSearch(true);
 
-    const { response, err } = await mediaApi.search({
-      mediaType,
-      query,
-      page,
-    });
+      const { response, err } = await mediaApi.search({
+        mediaType,
+        query,
+        page
+      });
 
-    setOnSearch(false);
+      setOnSearch(false);
 
-    if (err) toast.error(err.message);
-    if (response) {
-      if (page > 1) setMedias((m) => [...m, ...response.results]);
-      else setMedias([...response.results]);
-    }
-  }, [mediaType, query, page]);
+      if (err) toast.error(err.message);
+      if (response) {
+        if (page > 1) setMedias(m => [...m, ...response.results]);
+        else setMedias([...response.results]);
+      }
+    },
+    [mediaType, query, page],
+  );
 
   useEffect(() => {
     if (query.trim().length === 0) {
@@ -75,10 +78,7 @@ const MediaSearch = () => {
                 key={index}
                 variant={mediaType === item ? "contained" : "text"}
                 sx={{
-                  color:
-                    mediaType === item
-                      ? "primary.contrastText"
-                      : "text.primary",
+                  color: mediaType === item ? "primary.contrastText" : "text.primary"
                 }}
                 onClick={() => onCategoryChange(item)}
               >
@@ -88,7 +88,7 @@ const MediaSearch = () => {
           </Stack>
           <TextField
             color="success"
-            placeholder="Search ScreenWave"
+            placeholder="Search MoonFlix"
             sx={{ width: "100%" }}
             autoFocus
             onChange={onQueryChange}
@@ -97,7 +97,10 @@ const MediaSearch = () => {
           <MediaGrid medias={medias} mediaType={mediaType} />
 
           {medias.length > 0 && (
-            <LoadingButton loading={onSearch} onClick={() => setPage(page + 1)}>
+            <LoadingButton
+              loading={onSearch}
+              onClick={() => setPage(page + 1)}
+            >
               load more
             </LoadingButton>
           )}

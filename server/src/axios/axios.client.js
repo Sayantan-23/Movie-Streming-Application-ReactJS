@@ -4,7 +4,7 @@ const get = async (url) => {
   const response = await axios.get(url, {
     headers: {
       Accept: "application/json",
-      "Accept-Encoding":"identity"
+      "Accept-Encoding": "identity"
     }
   });
   return response.data;

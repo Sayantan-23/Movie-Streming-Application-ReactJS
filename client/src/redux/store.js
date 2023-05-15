@@ -10,9 +10,9 @@ const store = configureStore({
     user: userSlice,
     themeMode: themeModeSlice,
     authModal: authModalSlice,
-    appState: appStateSlice,
     globalLoading: globalLoadingSlice,
-  },
+    appState: appStateSlice
+  }
 });
 
 export default store;

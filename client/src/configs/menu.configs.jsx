@@ -1,57 +1,57 @@
-import HomeOutLinedIcon from "@mui/icons-material/HomeOutlined";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import SlideshowOutlinedIcon from "@mui/icons-material/SlideshowOutlined";
 import LiveTvOutlinedIcon from "@mui/icons-material/LiveTvOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-// import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import RateReviewOutlinedIcon from "@mui/icons-material/RateReviewOutlined";
 import LockResetOutlinedIcon from "@mui/icons-material/LockResetOutlined";
 
 const main = [
   {
-    display: "Home",
+    display: "home",
     path: "/",
-    icon: <HomeOutLinedIcon />,
-    state: "home",
+    icon: <HomeOutlinedIcon />,
+    state: "home"
   },
   {
-    display: "Movies",
+    display: "movies",
     path: "/movie",
     icon: <SlideshowOutlinedIcon />,
-    state: "movie",
+    state: "movie"
   },
   {
-    display: "Series",
+    display: "tv series",
     path: "/tv",
     icon: <LiveTvOutlinedIcon />,
-    state: "tv",
+    state: "tv"
   },
-  // {
-  //   display: <SearchOutlinedIcon />,
-  //   path: "/search",
-  //   icon: <SearchOutlinedIcon />,
-  //   state: "search",
-  // },
+  {
+    display: "search",
+    path: "/search",
+    icon: <SearchOutlinedIcon />,
+    state: "search"
+  }
 ];
 
 const user = [
   {
-    display: "Favorites",
+    display: "favorites",
     path: "/favorites",
     icon: <FavoriteBorderOutlinedIcon />,
-    state: "favorite",
+    state: "favorite"
   },
   {
-    display: "Reviews",
+    display: "reviews",
     path: "/reviews",
     icon: <RateReviewOutlinedIcon />,
-    state: "reviews",
+    state: "reviews"
   },
   {
-    display: "Password Update",
+    display: "password update",
     path: "/password-update",
     icon: <LockResetOutlinedIcon />,
-    state: "password.update",
-  },
+    state: "password.update"
+  }
 ];
 
 const menuConfigs = { main, user };
