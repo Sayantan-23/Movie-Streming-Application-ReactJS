@@ -2,7 +2,17 @@ import { useSelector, useDispatch } from "react-redux";
 import MenuIcon from "@mui/icons-material/Menu";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
-import { AppBar, Box, Button, IconButton, Stack, Toolbar, useScrollTrigger } from "@mui/material";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import {
+  AppBar,
+  Box,
+  Button,
+  IconButton,
+  Stack,
+  Toolbar,
+  Typography,
+  useScrollTrigger,
+} from "@mui/material";
 import { cloneElement, useState } from "react";
 import { Link } from "react-router-dom";
 import menuConfigs from "../../configs/menu.configs";
@@ -19,17 +29,25 @@ const ScrollAppBar = ({ children, window }) => {
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 50,
-    target: window ? window() : undefined
+    target: window ? window() : undefined,
   });
 
   return cloneElement(children, {
     sx: {
-      color: trigger ? "text.primary" : themeMode === themeModes.dark ? "primary.contrastText" : "text.primary",
-      backgroundColor: trigger ? "background.paper" : themeMode === themeModes.dark ? "transparent" : "background.paper"
-    }
+      color: trigger
+        ? "text.primary"
+        : themeMode === themeModes.dark
+        ? "primary.contrastText"
+        : "text.primary",
+      backgroundColor: trigger
+        ? "background.paper"
+        : themeMode === themeModes.dark
+        ? "transparent"
+        : "background.paper",
+    },
   });
 };
-const Topbar = () => {
+const TopBar = () => {
   const { user } = useSelector((state) => state.user);
   const { appState } = useSelector((state) => state.appState);
   const { themeMode } = useSelector((state) => state.themeMode);
@@ -38,8 +56,9 @@ const Topbar = () => {
 
   const dispatch = useDispatch();
 
-  const onSwithTheme = () => {
-    const theme = themeMode === themeModes.dark ? themeModes.light : themeModes.dark;
+  const onSwitchTheme = () => {
+    const theme =
+      themeMode === themeModes.dark ? themeModes.light : themeModes.dark;
     dispatch(setThemeMode(theme));
   };
 
@@ -50,7 +69,9 @@ const Topbar = () => {
       <Sidebar open={sidebarOpen} toggleSidebar={toggleSidebar} />
       <ScrollAppBar>
         <AppBar elevation={0} sx={{ zIndex: 9999 }}>
-          <Toolbar sx={{ alignItems: "center", justifyContent: "space-between" }}>
+          <Toolbar
+            sx={{ alignItems: "center", justifyContent: "space-between" }}
+          >
             <Stack direction="row" spacing={1} alignItems="center">
               <IconButton
                 color="inherit"
@@ -66,42 +87,53 @@ const Topbar = () => {
             </Stack>
 
             {/* main menu */}
-            <Box flexGrow={1} alignItems="center" display={{ xs: "none", md: "flex" }}>
-              <Box sx={{ marginRight: "30px" }}>
+            <Box
+              flexGrow={1}
+              alignItems="center"
+              display={{ xs: "none", md: "flex" }}
+            >
+              <Box sx={{ marginRight: "35px" }}>
                 <Logo />
               </Box>
               {menuConfigs.main.map((item, index) => (
-                <Button
+                <Typography
                   key={index}
                   sx={{
-                    color: appState.includes(item.state) ? "primary.contrastText" : "inherit",
-                    mr: 2
+                    color: themeMode === themeModes.light ? "#000" : "#fff",
+                    mr: 4,
+                    "&:hover": {
+                      color: themeMode === themeModes.light ? "#010101" : "#e0e1dd",
+                    },
+                    // ":active": { color: "#ef5350" },
+                    textTransform: "capitalize",
+                    fontSize:"1.05rem"
                   }}
                   component={Link}
                   to={item.path}
                   variant={appState.includes(item.state) ? "contained" : "text"}
                 >
                   {item.display}
-                </Button>
+                </Typography>
               ))}
-              <IconButton
-                sx={{ color: "inherit" }}
-                onClick={onSwithTheme}
-              >
+              <IconButton sx={{ color: "inherit", mr: 2 }} component={Link} to={"/search"}>
+                  <SearchOutlinedIcon />
+              </IconButton>
+              <IconButton sx={{ color: "inherit" }} onClick={onSwitchTheme}>
                 {themeMode === themeModes.dark && <DarkModeOutlinedIcon />}
                 {themeMode === themeModes.light && <WbSunnyOutlinedIcon />}
               </IconButton>
             </Box>
-            {/* main menu */}
 
             {/* user menu */}
             <Stack spacing={3} direction="row" alignItems="center">
-              {!user && <Button
-                variant="contained"
-                onClick={() => dispatch(setAuthModalOpen(true))}
-              >
-                sign in
-              </Button>}
+              {!user && (
+                <Button
+                  variant="contained"
+                  onClick={() => dispatch(setAuthModalOpen(true))}
+                >
+                  Sign In
+                </Button>
+              )}
             </Stack>
             {user && <UserMenu />}
             {/* user menu */}
@@ -112,4 +144,4 @@ const Topbar = () => {
   );
 };
 
-export default Topbar;
+export default TopBar;

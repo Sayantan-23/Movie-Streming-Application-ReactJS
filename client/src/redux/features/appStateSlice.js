@@ -1,19 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const appStateSlice = createSlice({
-  name: "AppState",
+  name: "ThemeMode",
   initialState: {
-    appState: ""
+    appState: "",
   },
   reducers: {
     setAppState: (state, action) => {
       state.appState = action.payload;
-    }
-  }
+    },
+  },
 });
 
-export const {
-  setAppState
-} = appStateSlice.actions;
+export const { setAppState } = appStateSlice.actions;
 
 export default appStateSlice.reducer;

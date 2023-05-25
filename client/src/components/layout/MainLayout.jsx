@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import Footer from "../common/Footer";
 import GlobalLoading from "../common/GlobalLoading";
-import Topbar from "../common/Topbar";
+import TopBar from "../common/Topbar";
 import AuthModal from "../common/AuthModal";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -41,34 +41,24 @@ const MainLayout = () => {
 
   return (
     <>
-      {/* global loading */}
+      {/* Global Loading */}
       <GlobalLoading />
-      {/* global loading */}
 
-      {/* login modal */}
+      {/* Login Modal */}
       <AuthModal />
-      {/* login modal */}
 
       <Box display="flex" minHeight="100vh">
-        {/* header */}
-        <Topbar />
-        {/* header */}
+        {/* Header */}
+        <TopBar />
 
-        {/* main */}
-        <Box
-          component="main"
-          flexGrow={1}
-          overflow="hidden"
-          minHeight="100vh"
-        >
+        {/* Main */}
+        <Box component="main" flexGrow={1} overflow="hidden" minHeight="100vh">
           <Outlet />
         </Box>
-        {/* main */}
       </Box>
 
-      {/* footer */}
+      {/* Footer */}
       <Footer />
-      {/* footer */}
     </>
   );
 };

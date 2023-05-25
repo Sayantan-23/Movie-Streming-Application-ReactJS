@@ -1,6 +1,7 @@
 import { Avatar } from "@mui/material";
 
-const TextAvatar = ({ text }) => {
+const TextAvatar = ({ text, onClick }) => {
+  
   const stringToColor = (str) => {
     let hash = 0;
     let i;
@@ -24,8 +25,10 @@ const TextAvatar = ({ text }) => {
       sx={{
         backgroundColor: stringToColor(text),
         width: 40,
-        height: 40
+        height: 40,
+        cursor:"pointer"
       }}
+      onClick = {onClick}
       children={`${text.split(" ")[0][0]}`}
     />
   );
