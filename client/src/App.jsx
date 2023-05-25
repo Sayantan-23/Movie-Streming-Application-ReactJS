@@ -3,7 +3,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import PageWrapper from "./components/common/pageWrapper";
+import PageWrapper from "./components/common/PageWrapper";
 import MainLayout from "./components/layout/MainLayout";
 import themeConfigs from "./configs/theme.configs";
 import routes from "./routes/routes";
