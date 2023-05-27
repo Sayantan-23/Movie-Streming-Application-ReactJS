@@ -14,7 +14,11 @@ ReactJS(React-Router, Axios, Redux-Toolkit), MUI, NodeJS, ExpressJS, MongoDB
 
 ## How To Run Locally
 
-Just copy all the files and then create an **.env** files in server directory. For reference use this [.env.example](./server/) file. Then run these following commands -
+Just copy all the files and then create an **.env** files in [server](./server/) directory. For reference use this [.env.example](./server/) file.
+
+In [client](./client/) directory go to [private.client.js](./client/src/api/client/private.client.js) file and [public.client.js](./client/src/api/client/public.client.js) file and change the baseURL to `http://127.0.0.1:<YourPortNumber>/api/v1/` in line no. 4. Use the port number you used in the **.env** file from the server directory.
+
+Then run these following commands -
 
 > In both directory server and client run these below command to install all the dependencies -
 
