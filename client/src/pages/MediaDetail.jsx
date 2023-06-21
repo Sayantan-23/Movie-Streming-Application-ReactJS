@@ -142,14 +142,16 @@ const MediaDetail = () => {
           <Box
             sx={{
               display: "flex",
-              flexDirection: { md: "row", xs: "column" },
+              flexDirection: { xs: "column" },
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
             {/* poster */}
             <Box
               sx={{
                 width: { xs: "70%", sm: "50%", md: "40%" },
-                margin: { xs: "0 auto 2rem", md: "0 2rem 0 0" },
+                margin: { xs: "0 auto 2rem" },
               }}
             >
               <Box
@@ -178,13 +180,12 @@ const MediaDetail = () => {
                   variant="h4"
                   fontSize={{ xs: "2rem", md: "2rem", lg: "4rem" }}
                   fontWeight="700"
-                  sx={{ ...uiConfigs.style.typoLines(2, "left") }}
+                  sx={{
+                    ...uiConfigs.style.typoLines(2, "left"),
+                    margin: "auto",
+                  }}
                 >
-                  {`${media.title || media.name} ${
-                    mediaType === tmdbConfigs.mediaType.movie
-                      ? media.release_date.split("-")[0]
-                      : media.first_air_date.split("-")[0]
-                  }`}
+                  {media.title || media.name}
                 </Typography>
                 {/* title */}
 
